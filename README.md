@@ -11,7 +11,7 @@ sudo apt upgrade
 ```
 
 #### Create a user and assign in sudo group to run admin commands
-````bash
+```bash
 sudo adduser username		# create a new user
 sudo adduser username sudo	# assign in sudo group
 
