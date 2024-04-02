@@ -101,13 +101,10 @@ flask run --host=0.0.0.0	# access development server from outside
 
 go to ipaddress:5000 to see the application is running
 ```
-##### delete allow-5000 from google cloud. we don't need 5000 port further.
-##### the same way allow 80 port `TCP=80` from google cloud for run app in production
+##### delete allow-5000 from google cloud. we don't need 5000 port further. the same way allow 80 port `TCP=80` from google cloud for run app in production
 
 #### set up firewall on our server
-##### the firewall rule we set on google cloud is applicable for
-##### all instances of a project and this configuration is
-##### applicable for only our remote machine
+##### the firewall rule we set on google cloud is applicable for all instances of a project and this configuration is applicable for only our remote machine
 ```bash
 sudo apt install ufw			# install ufw
 sudo ufw status				# see the status
@@ -147,8 +144,7 @@ server {
 
 sudo systemctl restart nginx			# restart nginx
 ```
-##### visit the ip address it should gives nginx error because it still doesn.t know
-##### how to process python code. Now we need gunicorn
+##### visit the ip address it should gives nginx error because it still doesn't know how to process python code. Now we need gunicorn
 
 #### gunicorn setup 
 ```bash
