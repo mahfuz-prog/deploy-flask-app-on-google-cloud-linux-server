@@ -213,7 +213,7 @@ sudo supervisorctl status		# check the status of supervisor
 * `cat /etc/nginx/sites-enabled/flaskapp` check nginx config
 * `cat /etc/supervisor/conf.d/flaskapp.conf` supervisor configuration
 * `ls /var/log/flaskapp/` supervisor logfile
-* 'cat /var/log/flaskapp/flaskapp.err.log' check the log file of supervisor
+* 'cat /var/log/flaskapp/flaskapp.err.log` check the log file of supervisor
 * `cat /etc/hosts` there should be external ip address with hostname
 * `ssh, http/tcp` should allow on [google cloud firewall](https://console.cloud.google.com/net-security/firewall-manager/firewall-policies/)
 * `sudo ufw status`
