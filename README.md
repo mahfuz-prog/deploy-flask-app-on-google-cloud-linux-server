@@ -132,7 +132,7 @@ server {
 	server_name ip;
 	
 	location /static {
-		/home/username/Flask/flaskapp/static;
+		alias /home/username/Flask/flaskapp/static;
 	}
 	
 	location / {
