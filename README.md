@@ -203,3 +203,22 @@ yourip     hostname
 sudo supervisorctl reload		# start running the application
 sudo supervisorctl status		# check the status of supervisor
 ```
+
+## Quick recap
+* `cat /etc/group` check user in sudo group.
+* `ls -la ~` .ssh permission should 700(drwx------) for .ssh directory of our remote server.
+* `ls -la ~/.ssh` authorized_keys which contain ssh public key should have 600(-rw-------) permission.
+* `cat /etc/ssh/sshd_config` PermitRootLogin and PasswordAuthentication should no
+* `ls /etc/nginx/sites-enabled/` there should be only one file which contain nginx configuration
+* `cat /etc/nginx/sites-enabled/flaskapp` check nginx config
+* `cat /etc/supervisor/conf.d/flaskapp.conf` supervisor configuration
+* `ls /var/log/flaskapp/` supervisor logfile
+* `cat /etc/hosts` there should be external ip address with hostname
+* ssh, http/tcp should allow on [google cloud firewall](https://console.cloud.google.com/net-security/firewall-manager/firewall-policies/)
+* `sudo ufw status`
+```bash
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+```
