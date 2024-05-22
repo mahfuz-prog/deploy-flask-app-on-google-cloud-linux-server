@@ -159,7 +159,6 @@ gunicorn -w 5 run:app			# check the app running
 ```
 
 #### Supervisor process manager
-##### helps to keep runing our app and autostart if server crash
 ```bash
 sudo apt install supervisor		# install supervisor
 
@@ -222,4 +221,75 @@ sudo supervisorctl status		# check the status of supervisor
 80/tcp                     ALLOW       Anywhere
 22/tcp (v6)                ALLOW       Anywhere (v6)
 80/tcp (v6)                ALLOW       Anywhere (v6)
+```
+
+## Add custom domain
+#### Go to google cloud [Dns zone](https://console.cloud.google.com/net-services/dns/) and create a zone.
+
+##### Add standard
+* `DNS name = blank`. it will help to load the domain without www. 
+* Resource recoed type =  A
+* `IPv4 address = ip`. ip address of our server.
+##### Add standard
+* `DNS name = www`
+* Resource recoed type =  CNAME
+* `Canonical name = demo.com`. put your domain name here.
+##### Copy all NS record and put them on Domain service provider namespace
+
+## Enable ssl certificate
+#### Firewalls update from google cloud dashboard
+* Click on server name from google cloude VM instances
+* edit and active HTTP traffic and HTTPS traffic from Firewalls section
+
+#### change nginx configuration
+```bash
+sudo nano /etc/nginx/sites-enabled/flaskapp
+# from server block change ip address to domain name.
+server {
+	server_name ip; # replace to
+	server_name webwaymark.com www.webwaymark.com; # this
+}
+```
+
+#### update ubuntu server firewalls(ufw)
+```bash
+sudo ufw allow https
+sudo ufw status
+```
+
+## Ubuntu 20.04.6 LTS server configuration for ssl
+#### [Free ssl - certbot](https://certbot.eff.org/)
+```bash
+sudo apt install certbot
+sudo apt install software-properties-common
+sudo apt install python3-certbot-nginx
+sudo apt update
+
+sudo certbot --nginx
+=> email
+=> accept tos
+=> newslatter email subscription Yes/No
+=> enter domain name
+=> select name for activate HTTPS or blank for apply all
+=> Redirect
+
+# It should change some of nginx configuration
+sudo cat nano /etc/nginx/sites-enabled/flaskapp
+nginx -t 		# test nginx permission issues are okay.
+sudo nginx -t	# test should pass
+
+sudo systemctl restart nginx
+```
+
+#### renew ssl certificates automatic
+```bash
+# jumi mimic tge process
+sudo certbot renew --dry-run
+
+# edit crontab for renew certificate automatically after a certain amount of time
+sudo crontab -e
+===============
+# minutes hour day *(every month) *(day of the week) 
+30 4 1 * * sudo certbot renew --quiet
+===============
 ```
