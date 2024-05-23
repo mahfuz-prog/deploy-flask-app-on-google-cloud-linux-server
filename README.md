@@ -249,6 +249,8 @@ server {
 	server_name ip; # replace to
 	server_name webwaymark.com www.webwaymark.com; # this
 }
+
+sudo systemctl restart nginx
 ```
 
 #### update ubuntu server firewalls(ufw)
@@ -260,6 +262,7 @@ sudo ufw status
 ## Ubuntu 20.04.6 LTS server configuration for ssl
 #### [Free ssl - certbot](https://certbot.eff.org/)
 ```bash
+sudo apt update
 sudo apt install certbot
 sudo apt install software-properties-common
 sudo apt install python3-certbot-nginx
